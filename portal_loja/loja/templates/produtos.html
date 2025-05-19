@@ -1,0 +1,16 @@
+<h1>Lista de Produtos</h1>
+
+<ul>
+    {% for produto in produtos %}
+        <li>
+            <strong>{{ produto.nome }}</strong><br>
+            Preço: R$ {{ produto.preco }}<br>
+            Estoque: {{ produto.estoque }}<br>
+            Marca: {{ produto.marca|default:"Não informada" }}<br>
+            Categoria: {{ produto.categoria.nome }}<br>
+            Descrição: {{ produto.descricao|default:"Sem descrição." }}
+        </li>
+    {% empty %}
+        <li>Nenhum produto cadastrado.</li>
+    {% endfor %}
+</ul>

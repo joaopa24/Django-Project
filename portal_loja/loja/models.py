@@ -71,11 +71,12 @@ class ItemPedido(models.Model):
         db_column='id_produto'
     )
     quantidade = models.PositiveIntegerField()
-    preco_unitario = models.DecimalField(max_digits=10, decimal_places=2)
+    preco_unitario = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
-    def __str__(self):
-        return f"{self.quantidade} x {self.produto.nome} (Pedido #{self.pedido.id_pedido})"
-
+    def save(self, *args, **kwargs):
+        if self.preco_unitario is None:
+            self.preco_unitario = self.produto.preco
+        super().save(*args, **kwargs)
 
 class Pagamento(models.Model):
     id_pagamento = models.AutoField(primary_key=True)
