@@ -1,16 +1,38 @@
-<h1>Lista de Produtos</h1>
+{% load static %}
 
-<ul>
-    {% for produto in produtos %}
-        <li>
-            <strong>{{ produto.nome }}</strong><br>
-            Preço: R$ {{ produto.preco }}<br>
-            Estoque: {{ produto.estoque }}<br>
-            Marca: {{ produto.marca|default:"Não informada" }}<br>
-            Categoria: {{ produto.categoria.nome }}<br>
-            Descrição: {{ produto.descricao|default:"Sem descrição." }}
-        </li>
-    {% empty %}
-        <li>Nenhum produto cadastrado.</li>
-    {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'mystyles.css' %}">
+        <title>Xbeast Games</title>
+    </head>
+    <body>
+        <div class="topnav">
+            <a href="/">PRINCIPAL</a> |
+            <a href="/produtos">PRODUTOS</a> |
+            <a href="/categorias">CATEGORIAS</a> |
+            <a href="/auth/login">LOGIN</a> |
+            <a href="/auth/cadastro">CADASTRE-SE</a>
+        </div>
+        <div class="mycard">
+            <h1>Produtos</h1>
+            <ul>
+                {% for produto in produtos %}
+                    <li>
+                       <a href="{% url 'produto_detalhe' produto.id_produto %}">
+                        <strong>{{ produto.nome }}</strong><br>
+                        Preço: R$ {{ produto.preco }}<br>
+                        Estoque: {{ produto.estoque }}<br>
+                        Marca: {{ produto.marca|default:"Não informada" }}<br>
+                        Categoria: {{ produto.categoria.nome }}<br>
+                        Descrição: {{ produto.descricao|default:"Sem descrição." }}
+                       </a>
+                    </li>
+                {% empty %}
+                    <li>Nenhum produto cadastrado.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'mystyles.css' %}">
+    <title>Login – Xbeast Games</title>
+</head>
+<body>
+    <div class="topnav">
+        <a href="/">PRINCIPAL</a> |
+        <a href="/produtos">PRODUTOS</a> |
+        <a href="/categorias">CATEGORIAS</a> |
+        <a href="/login">LOGIN</a> |
+        <a href="/cadastro">CADASTRE-SE</a>
+    </div>
+    <div class="mycard">
+        <h1>Login</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label for="username">Usuário:</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Senha:</label><br>
+            <input type="password" id="password" name="password" required><br><br>
+            <button type="submit">Entrar</button>
+        </form>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

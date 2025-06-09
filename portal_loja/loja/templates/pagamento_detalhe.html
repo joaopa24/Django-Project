@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'mystyles.css' %}">
+    <title>Pagamento #{{ pagamento.id }}</title>
+</head>
+<body>
+    <div class="topnav">
+        <a href="/">PRINCIPAL</a> |
+        <a href="/pagamentos">PAGAMENTOS</a> |
+        <a href="/pedidos">PEDIDOS</a>
+    </div>
+    <div class="mycard">
+        <h1>Detalhe do Pagamento #{{ pagamento.id }}</h1>
+        <p><strong>Pedido:</strong> #{{ pagamento.pedido.id }}</p>
+        <p><strong>Data de pagamento:</strong> {{ pagamento.data_pagamento }}</p>
+        <p><strong>Valor:</strong> R$ {{ pagamento.valor }}</p>
+        <p><strong>Status:</strong> {{ pagamento.status }}</p>
+        <a href="{% url 'pagamentos' %}">← Voltar à lista de pagamentos</a>
+    </div>
+</body>
+</html>
