@@ -8,19 +8,22 @@
 </head>
 <body>
   {% include 'includes/header.html' %}
-  <h1>Meus Pedidos</h1>
 
-  {% if pedidos %}
-    <ul>
-      {% for pedido in pedidos %}
-        <li>
-          Pedido #{{ pedido.id_pedido }} — Data: {{ pedido.data_pedido|date:"d/m/Y" }} — Valor total: R$ {{ pedido.valor_total|floatformat:2 }}
-          <a href="{% url 'pedido_detalhe' pedido.id_pedido %}">Ver detalhes</a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>Você não possui pedidos ainda.</p>
-  {% endif %}
+  <div class="pedidos-container">
+    <h1>Meus Pedidos</h1>
+
+    {% if pedidos %}
+      <ul>
+        {% for pedido in pedidos %}
+          <li>
+            Pedido #{{ pedido.id_pedido }} — Data: {{ pedido.data_pedido|date:"d/m/Y" }} — Valor total: R$ {{ pedido.valor_total|floatformat:2 }}
+            <a href="{% url 'pedido_detalhe' pedido.id_pedido %}">Ver detalhes</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Você não possui pedidos ainda.</p>
+    {% endif %}
+  </div>
 </body>
 </html>

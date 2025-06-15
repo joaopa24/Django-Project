@@ -9,7 +9,7 @@
   <body>
     {% include 'includes/header.html' %}
 
-    <div class="mycard">
+    <div class="mycard produto-detalhe">
       <h1>{{ produto.nome }}</h1>
       <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
       <p><strong>Estoque:</strong> {{ produto.estoque }}</p>
@@ -20,8 +20,6 @@
         </a>
       </p>
       <p><strong>Descrição:</strong><br>{{ produto.descricao|default:"Sem descrição." }}</p>
-
-      <hr>
 
       <!-- link para página de compra -->
       <a href="{% url 'compra' produto.id_produto %}" class="btn">Comprar este produto</a>

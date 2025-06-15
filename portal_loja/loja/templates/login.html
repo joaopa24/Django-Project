@@ -9,7 +9,7 @@
   <body>
     {% include 'includes/header.html' %}
 
-    <div class="mycard">
+    <div class="mycard aut">
       <h1>Login</h1>
       {% if erro %}
         <p class="error">{{ erro }}</p>
@@ -17,10 +17,10 @@
       <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <label for="username">Usuário:</label><br>
-        <input type="text" id="username" name="username" required><br><br>
+        <input type="text" id="username" name="username" required>
 
         <label for="senha">Senha:</label><br>
-        <input type="password" id="senha" name="senha" required><br><br>
+        <input type="password" id="senha" name="senha" required>
 
         <button type="submit">Entrar</button>
       </form>
