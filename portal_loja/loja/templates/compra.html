@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'mystyles.css' %}">
+    <title>Comprar – {{ produto.nome }}</title>
+  </head>
+  <body>
+    <div class="topnav">
+      <a href="/">PRINCIPAL</a> |
+      <a href="/produtos">PRODUTOS</a> |
+      <a href="/categorias">CATEGORIAS</a> |
+      <a href="/auth/login">LOGIN</a> |
+      <a href="/auth/cadastro">CADASTRE-SE</a>
+    </div>
+
+    <div class="mycard">
+      <h1>Checkout</h1>
+      <h2>{{ produto.nome }}</h2>
+      <p>Preço unitário: R$ {{ produto.preco }}</p>
+
+      <form method="post" action="{% url 'finalizar_compra' produto.id_produto %}">
+        {% csrf_token %}
+        <label for="quantidade">Quantidade:</label><br>
+        <input type="number" id="quantidade" name="quantidade" min="1"
+               max="{{ produto.estoque }}" value="1" required><br><br>
+
+        <label for="tipo_pagamento">Forma de pagamento:</label><br>
+        <select id="tipo_pagamento" name="tipo_pagamento" required>
+          <option value="">Selecione...</option>
+          <option value="boleto">Boleto</option>
+          <option value="cartao_credito">Cartão de Crédito</option>
+          <option value="pix">PIX</option>
+        </select><br><br>
+
+        <button type="submit">Finalizar Compra</button>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,14 +1,60 @@
-{% extends "base.html" %}
-
 {% load static %}
 
-{% block titulo %}
-    Hyper Informática
-{% endblock %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'mystyles.css' %}">
+        <title>Xbeast Games - Sua Loja de Produtos Eletrônicos</title>
+    </head>
+    <body>
+        <div class="topnav">
+            <a href="/" class="active">PRINCIPAL</a> |
+            <a href="/produtos">PRODUTOS</a> |
+            <a href="/categorias">CATEGORIAS</a> |
+            {% if user.is_authenticated %}
+                <a href="/pedidos">MEUS PEDIDOS</a> |
+                <a href="/auth/logout">LOGOUT ({{ user.username }})</a>
+            {% else %}
+                <a href="/auth/login">LOGIN</a> |
+                <a href="/auth/cadastro">CADASTRE-SE</a>
+            {% endif %}
+        </div>
 
-{% block conteudo %}
-    <div class="main">
-        <h1>Portal Biblioteca</h1>
-        <img src="{% static 'logo-portal.png' %}" alt="logo-portal" width="400" height="300">
-    </div>
-{% endblock %}
+        <div class="main">
+            <h1>🎮 Xbeast Games</h1>
+            <p>Sua loja de produtos eletrônicos e games</p>
+        </div>
+
+        {% if produtos_destaque %}
+        <div class="mycard">
+            <h2>Produtos em Destaque</h2>
+            {% for produto in produtos_destaque %}
+                <div>
+                    <h3><a href="{% url 'produto_detalhe' produto.id_produto %}">{{ produto.nome }}</a></h3>
+                    <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
+                    <p><strong>Categoria:</strong> {{ produto.categoria.nome }}</p>
+                    <p><strong>Estoque:</strong> {{ produto.estoque }} unidades</p>
+                    <a href="{% url 'produto_detalhe' produto.id_produto %}">Ver Detalhes</a>
+                    {% if user.is_authenticated %}
+                        | <a href="{% url 'compra' produto.id_produto %}">Comprar</a>
+                    {% endif %}
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="mycard">
+            <h2>Navegue por Categorias</h2>
+            <p><a href="/categorias">Ver todas as categorias</a></p>
+        </div>
+
+        {% if not user.is_authenticated %}
+        <div class="mycard">
+            <h2>Cadastre-se</h2>
+            <p><a href="/auth/cadastro">Criar conta gratuita</a> | <a href="/auth/login">Já tenho conta</a></p>
+        </div>
+        {% endif %}
+    </body>
+</html>

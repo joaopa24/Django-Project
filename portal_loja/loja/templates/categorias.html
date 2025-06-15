@@ -2,35 +2,33 @@
 
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'mystyles.css' %}">
     <title>Categorias – Xbeast Games</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="topnav">
-        <a href="/">PRINCIPAL</a> |
-        <a href="/categorias">CATEGORIAS</a> |
-        <a href="/produtos">PRODUTOS</a> |
-        <a href="/login">LOGIN</a>
+      <a href="/">PRINCIPAL</a> |
+      <a href="/produtos">PRODUTOS</a> |
+      <a href="/categorias">CATEGORIAS</a> |
+      <a href="/auth/login">LOGIN</a> |
+      <a href="/auth/cadastro">CADASTRE-SE</a>
     </div>
+
     <div class="mycard">
-        <h1>Categorias</h1>
-        <ul>
-            {% for categoria in categorias %}
-                {% if categoria.id_categoria %}
-                    <li>
-                        <a href="{% url 'categoria_detalhe' categoria.id_categoria %}">
-                            {{ categoria.nome }}
-                        </a>
-                    </li>
-                {% else %}
-                    <li>{{ categoria.nome }} (ID inválido)</li>
-                {% endif %}
-            {% empty %}
-                <li>Nenhuma categoria cadastrada.</li>
-            {% endfor %}
-        </ul>
+      <h1>Categorias</h1>
+      <ul>
+        {% for cat in categorias %}
+          <li>
+            <a href="{% url 'categoria_detalhe' cat.id_categoria %}">
+              {{ cat.nome }}
+            </a>
+          </li>
+        {% empty %}
+          <li>Sem categorias cadastradas.</li>
+        {% endfor %}
+      </ul>
     </div>
-</body>
+  </body>
 </html>

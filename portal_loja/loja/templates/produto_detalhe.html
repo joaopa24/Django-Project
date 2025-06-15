@@ -2,25 +2,36 @@
 
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'mystyles.css' %}">
-    <title>Produto – {{ produto.nome }}</title>
-</head>
-<body>
+    <title>{{ produto.nome }} – Xbeast Games</title>
+  </head>
+  <body>
     <div class="topnav">
-        <a href="/">PRINCIPAL</a> |
-        <a href="/produtos">PRODUTOS</a> |
-        <a href="/categorias">CATEGORIAS</a>
+      <a href="/">PRINCIPAL</a> |
+      <a href="/produtos">PRODUTOS</a> |
+      <a href="/categorias">CATEGORIAS</a> |
+      <a href="/auth/login">LOGIN</a> |
+      <a href="/auth/cadastro">CADASTRE-SE</a>
     </div>
+
     <div class="mycard">
-        <h1>{{ produto.nome }}</h1>
-        <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
-        <p><strong>Estoque:</strong> {{ produto.estoque }}</p>
-        <p><strong>Marca:</strong> {{ produto.marca|default:"Não informada" }}</p>
-        <p><strong>Categoria:</strong> {{ produto.categoria.nome }}</p>
-        <p><strong>Descrição:</strong> {{ produto.descricao|default:"Sem descrição." }}</p>
-        <a href="{% url 'produtos' %}">← Voltar à lista de produtos</a>
+      <h1>{{ produto.nome }}</h1>
+      <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
+      <p><strong>Estoque:</strong> {{ produto.estoque }}</p>
+      <p><strong>Marca:</strong> {{ produto.marca|default:"Não informada" }}</p>
+      <p><strong>Categoria:</strong>
+        <a href="{% url 'categoria_detalhe' produto.categoria.id_categoria %}">
+          {{ produto.categoria.nome }}
+        </a>
+      </p>
+      <p><strong>Descrição:</strong><br>{{ produto.descricao|default:"Sem descrição." }}</p>
+
+      <hr>
+
+      <!-- link para página de compra -->
+      <a href="{% url 'compra' produto.id_produto %}" class="btn">Comprar este produto</a>
     </div>
-</body>
+  </body>
 </html>
