@@ -1,0 +1,13 @@
+<nav class="topnav">
+  <a href="/" class="{% if request.path == '/' %}active{% endif %}">PRINCIPAL</a><span class="pipe">|</span>
+  <a href="/produtos" class="{% if request.path|slice:':9' == '/produtos' %}active{% endif %}">PRODUTOS</a><span class="pipe">|</span>
+  <a href="/categorias" class="{% if request.path|slice:':10' == '/categorias' %}active{% endif %}">CATEGORIAS</a><span class="pipe">|</span>
+
+  {% if user.is_authenticated %}
+    <a href="/pedidos" class="{% if request.path|slice:':8' == '/pedidos' %}active{% endif %}">MEUS PEDIDOS</a><span class="pipe">|</span>
+    <a href="/auth/logout">LOGOUT ({{ user.username }})</a>
+  {% else %}
+    <a href="/auth/login" class="{% if request.path|slice:':11' == '/auth/login' %}active{% endif %}">LOGIN</a><span class="pipe">|</span>
+    <a href="/auth/cadastro" class="{% if request.path|slice:':12' == '/auth/cadastro' %}active{% endif %}">CADASTRE-SE</a>
+  {% endif %}
+</nav>

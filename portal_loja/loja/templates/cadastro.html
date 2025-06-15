@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,14 +7,9 @@
     <title>Cadastro – Xbeast Games</title>
   </head>
   <body>
-    <div class="topnav">
-      <a href="/">PRINCIPAL</a> |
-      <a href="/produtos">PRODUTOS</a> |
-      <a href="/categorias">CATEGORIAS</a> |
-      <a href="/auth/login">LOGIN</a> |
-      <a href="/auth/cadastro">CADASTRE-SE</a>
-    </div>
-
+    
+    {% include 'includes/header.html' %}
+    
     <div class="mycard">
       <h1>Cadastro</h1>
       <form method="post" action="{% url 'cadastro' %}">
