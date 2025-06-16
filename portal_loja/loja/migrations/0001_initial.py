@@ -63,6 +63,7 @@ class Migration(migrations.Migration):
                 ('preco', models.DecimalField(decimal_places=2, max_digits=10)),
                 ('marca', models.CharField(blank=True, max_length=255, null=True)),
                 ('estoque', models.IntegerField(default=0)),
+                ('imagem', models.ImageField(blank=True, null=True, upload_to='produtos/')),
                 ('categoria', models.ForeignKey(db_column='id_categoria', on_delete=django.db.models.deletion.PROTECT, related_name='produtos', to='loja.categoria')),
             ],
         ),

@@ -1,0 +1,19 @@
+{% load static %}
+<style>
+  .banner {
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+  }
+
+  .banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+</style>
+
+<div class="banner">
+  <img src="{% static 'banner.png' %}" alt="Banner da loja">
+</div>

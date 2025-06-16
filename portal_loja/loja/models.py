@@ -30,6 +30,7 @@ class Produto(models.Model):
     preco = models.DecimalField(max_digits=10, decimal_places=2)
     marca = models.CharField(max_length=255, blank=True, null=True)
     estoque = models.IntegerField(default=0)
+    imagem = models.ImageField(upload_to='produtos/', blank=True, null=True)  # Campo de imagem adicionado
     categoria = models.ForeignKey(
         Categoria,
         on_delete=models.PROTECT,
@@ -78,6 +79,7 @@ class ItemPedido(models.Model):
         if self.preco_unitario is None:
             self.preco_unitario = self.produto.preco
         super().save(*args, **kwargs)
+
 
 class Pagamento(models.Model):
     id_pagamento = models.AutoField(primary_key=True)

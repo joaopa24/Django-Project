@@ -18,7 +18,12 @@
       {% for produto in produtos %}
       <li>
         <a href="{% url 'produto_detalhe' produto.id_produto %}">
-          <strong>{{ produto.nome }}</strong>
+          {% if produto.imagem %}
+            <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" class="produto-img">
+          {% else %}
+            <img src="{% static 'img/sem-imagem.png' %}" alt="Imagem não disponível" class="produto-img">
+          {% endif %}
+          <strong>{{  produto.nome|truncatechars:55 }}</strong>
           <p>Preço: R$ {{ produto.preco }}</p>
           <p>Marca: {{ produto.marca|default:"Não informada" }}</p>
           <p>Categoria: {{ produto.categoria.nome }}</p>

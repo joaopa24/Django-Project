@@ -10,6 +10,11 @@
     {% include 'includes/header.html' %}
 
     <div class="mycard produto-detalhe">
+      {% if produto.imagem %}
+        <div class="produto-imagem">
+          <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" style="width: 300px; height:300px; border-radius: 200px;bject-fit: cover;">
+        </div>
+      {% endif %}
       <h1>{{ produto.nome }}</h1>
       <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
       <p><strong>Estoque:</strong> {{ produto.estoque }}</p>
@@ -21,7 +26,6 @@
       </p>
       <p><strong>Descrição:</strong><br>{{ produto.descricao|default:"Sem descrição." }}</p>
 
-      <!-- link para página de compra -->
       <a href="{% url 'compra' produto.id_produto %}" class="btn">Comprar este produto</a>
     </div>
   </body>

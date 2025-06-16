@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import Cliente, Categoria, Produto, Pedido, ItemPedido, Pagamento
 
 
@@ -19,10 +20,17 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 @admin.register(Produto)
 class ProdutoAdmin(admin.ModelAdmin):
-    list_display = ("nome", "preco", "marca", "estoque", "categoria")
+    list_display = ("imagem_preview", "nome", "preco", "marca", "estoque", "categoria")
     list_filter = ("categoria",)
     search_fields = ("nome", "marca", "categoria__nome")
     ordering = ("nome",)
+
+    def imagem_preview(self, obj):
+        if obj.imagem:
+            return format_html('<img src="{}" style="max-height: 50px;"/>', obj.imagem.url)
+        return "-"
+    imagem_preview.short_description = "Imagem"
+    imagem_preview.allow_tags = True
 
 
 @admin.register(Pedido)
